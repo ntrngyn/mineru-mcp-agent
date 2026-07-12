@@ -1,0 +1,42 @@
+services:
+  fastapi_backend:
+    build: .
+    container_name: mineru_api_server
+    command: uvicorn src.api.api_server:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data/vector_db:/app/data/vector_db
+      - ./.env:/app/.env
+    env_file:
+      - .env
+    restart: unless-stopped
+
+  streamlit_frontend:
+    build: .
+    container_name: mineru_web_app
+    command: streamlit run src/web/web_app.py --server.port 8501 --server.address 0.0.0.0
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./.env:/app/.env
+    env_file:
+      - .env
+    environment:
+      - API_URL=http://fastapi_backend:8000/chat
+    depends_on:
+      - fastapi_backend
+    restart: unless-stopped
+
+  mcp_server:
+    build: .
+    container_name: mineru_mcp_server
+    command: uvicorn src.mcp.mineru_mcp:mcp.sse_app --host 0.0.0.0 --port 8001
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./data/vector_db:/app/data/vector_db
+      - ./.env:/app/.env
+    env_file:
+      - .env
+    restart: unless-stopped

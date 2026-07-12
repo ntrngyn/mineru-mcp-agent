@@ -1,0 +1,7 @@
+mineru-env/
+__pycache__/
+*.pyc
+.env
+qdrant_test_db/
+.pytest_cache/
+.DS_Store
