@@ -25,3 +25,6 @@ __pycache__/
 # Logs and databases
 *.log
 data/vector_db/
+
+# LaTeX Report
+docs/latex_report/
