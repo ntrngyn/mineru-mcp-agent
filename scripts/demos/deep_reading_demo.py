@@ -50,7 +50,8 @@ Vector database là cơ sở dữ liệu chuyên dụng để lưu trữ các bi
 """ * 500  # Nhân bản lên 500 lần để làm tài liệu dài (giả lập sách/báo cáo)
     
     # Giả sử LLM nhận được yêu cầu: "Tìm hiểu về Mục tiêu của dự án"
-    print(f"Tổng số dòng của toàn bộ tài liệu giả lập: {len(sample_markdown.split('\n')):,}")
+    num_lines = len(sample_markdown.split('\n'))
+    print(f"Tổng số dòng của toàn bộ tài liệu giả lập: {num_lines:,}")
     total_tokens = count_tokens(sample_markdown)
     print(f"Tổng số token nếu nạp TOÀN BỘ tài liệu vào LLM: ~{total_tokens:,} tokens")
     
