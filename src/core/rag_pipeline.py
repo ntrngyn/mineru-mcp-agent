@@ -11,6 +11,7 @@ if os.path.exists(env_path):
                 os.environ[k.strip()] = v.strip().strip('"').strip("'")
 
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain_qdrant import QdrantVectorStore, FastEmbedSparse
 from langchain_classic.retrievers import ContextualCompressionRetriever
 from langchain_classic.retrievers.document_compressors import CrossEncoderReranker
@@ -66,9 +67,15 @@ def setup_rag_pipeline(persist_directory: str = "./qdrant_db"):
         base_compressor=compressor, base_retriever=retriever
     )
     
-    # 2. Thiết lập mô hình AI Gemini Pro 1.5
-    print("Đang khởi tạo Gemini Pro...")
-    llm = ChatGoogleGenerativeAI(model="gemini-flash-latest", temperature=0.2)
+    # 2. Thiết lập mô hình AI Llama 3 (via Groq)
+    print("Đang khởi tạo Llama 3.1...")
+    llm = ChatGroq(
+        model="llama-3.1-8b-instant",
+        temperature=0.0,
+        max_tokens=None,
+        timeout=None,
+        max_retries=2
+    )
     
     # 3. Thiết lập Mẫu Prompt chuyên dụng cho RAG
     qa_system_prompt = """Bạn là một chuyên gia phân tích dữ liệu chuyên nghiệp.
@@ -119,8 +126,13 @@ Ngữ cảnh:
 
 if __name__ == "__main__":
     if "GOOGLE_API_KEY" not in os.environ:
-        print("LỖI BẢO MẬT: Chưa tìm thấy GOOGLE_API_KEY.")
+        print("LỖI BẢO MẬT: Chưa tìm thấy GOOGLE_API_KEY (dành cho Embeddings).")
         print("Vui lòng thiết lập biến môi trường GOOGLE_API_KEY bằng lệnh export.")
+        exit(1)
+        
+    if "GROQ_API_KEY" not in os.environ:
+        print("LỖI BẢO MẬT: Chưa tìm thấy GROQ_API_KEY (dành cho Llama 3).")
+        print("Vui lòng thiết lập biến môi trường GROQ_API_KEY bằng lệnh export.")
         exit(1)
         
     if not os.path.exists("./data/vector_db"):

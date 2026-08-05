@@ -7,13 +7,11 @@ import csv
 LOCAL_API_URL = "http://localhost:8000/chat"
 CLOUD_API_URL = "http://YOUR_EC2_IP:8000/chat"  # Thay bằng IP thực tế của AWS EC2
 
-# Tập các câu hỏi kiểm thử (Queries)
 QUERIES = [
-    "Công nghệ MCP là gì?",
-    "Làm sao để cấu hình Hybrid Search?",
-    "Minh hoạ cách tính thuật toán BM25.",
-    "Ưu điểm của RAG so với mô hình LLM truyền thống?",
-    "Agent orchestration khác gì với function calling?"
+    "Thuật toán Adam đề xuất các giá trị mặc định cho \\beta_1, \\beta_2 và \\epsilon là bao nhiêu?",
+    "Tốc độ FPS và độ chính xác mAP của YOLO tiêu chuẩn và Fast YOLO là bao nhiêu?",
+    "Độ lỗi top-5 error (%) của mô hình ResNet-152 (10-crop testing) đạt được là bao nhiêu?",
+    "Công thức tính cơ chế chú ý Scaled Dot-Product Attention được định nghĩa thế nào?"
 ]
 
 def estimate_tokens(text: str) -> int:
