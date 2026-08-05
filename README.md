@@ -14,7 +14,7 @@ Hệ thống được đóng gói hoàn toàn bằng Docker với kiến trúc M
 Sau khi tải/nhận file `.zip` chứa mã nguồn, hãy giải nén file đó ra một thư mục. Sau đó, mở Terminal/Command Prompt và di chuyển (lệnh `cd`) vào thư mục gốc của dự án vừa giải nén.
 
 ### Bước 1: Cấu hình biến môi trường
-Kiểm tra file `.env` ở thư mục gốc (nếu chưa có, hãy copy từ `.env.example` hoặc tạo mới file `.env`). Hãy cập nhật các API Key cần thiết (ví dụ: `GEMINI_API_KEY` hoặc các thông số khác) vào file này.
+Kiểm tra file `.env` ở thư mục gốc (nếu chưa có, hãy copy từ `.env.example` hoặc tạo mới file `.env`). Hãy cập nhật các API Key cần thiết (bao gồm `GOOGLE_API_KEY` cho Embeddings và `GROQ_API_KEY` cho Llama 3) vào file này.
 
 Bạn có thể chạy dự án bằng 1 trong 2 cách sau:
 
