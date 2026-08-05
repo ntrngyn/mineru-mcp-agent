@@ -28,4 +28,4 @@ data/vector_db/
 performance_metrics.csv
 
 # LaTeX Report
-docs/latex_report/
+docs/
