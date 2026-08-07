@@ -14,5 +14,5 @@ requests
 fastembed
 sentence-transformers
 tiktoken
-mcp
+mcp==1.28.1
 magic-pdf[full]
